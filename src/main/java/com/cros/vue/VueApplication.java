@@ -1,7 +1,12 @@
 package com.cros.vue;
 
+import org.apache.coyote.http11.AbstractHttp11Protocol;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
@@ -77,14 +82,27 @@ module.exports = {
         https://blog.csdn.net/weixin_42036952/article/details/88564647
 
         */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@MapperScan(basePackages = "com.cros.vue.mapper", sqlSessionFactoryRef = "firstSqlSessionFactory")
 @ServletComponentScan
 public class VueApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VueApplication.class, args);
     }
+    //放置tomcat阻止上传文件过大的代码，具体上传参数在配置文件中设置
     @Bean
+    public TomcatServletWebServerFactory tomcatEmbedded() {
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
+            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
+                //-1 means unlimited
+                ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(-1);
+            }
+        });
+        return tomcat;
+    }
+    /*@Bean
     public CorsFilter corsFilter() {
 
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -95,7 +113,7 @@ public class VueApplication {
          * 同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，
          * 且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。
          */
-        config.setAllowCredentials(true);
+       /* config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:8080");
         config.addAllowedHeader("*");
         //该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次"预检"请求。
@@ -111,5 +129,5 @@ public class VueApplication {
         config.setMaxAge(1728000l);
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
-    }
+    }*/
 }
