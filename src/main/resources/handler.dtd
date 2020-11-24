@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!ELEMENT configuration (condition ?|outputFiled ?)>
+        <!ELEMENT condition (filter *)>
+        <!ELEMENT filter (property *|columnset?)><!ATTLIST filter name CDATA ""><!ATTLIST filter class CDATA "" #REQUIRED><!ATTLIST filter assign CDATA "" #IMPLIED>
+        <!ELEMENT property (filter ?|columnset ?)><!ATTLIST property name CDATA ""><!ATTLIST property enable (true|false)><!ATTLIST property label CDATA "" #IMPLIED > <!ATTLIST property order CDATA#IMPLIED >
+        <!ATTLIST property tag (custom|number|text|select|select3|date)><!ATTLIST property class CDATA #IMPLIED ><!ATTLIST property size CDATA "" #IMPLIED >
+        <!ATTLIST property method CDATA #IMPLIED >
+        <!ELEMENT columnset (column *)>
+        <!ELEMENT column ANY>
+        <!ATTLIST column sortable (custom|false) #IMPLIED><!ATTLIST column fixed (true|false)#IMPLIED><!ATTLIST column label CDATA "" #REQUIRED><!ATTLIST column order CDATA#IMPLIED ><!ATTLIST column element (true|false)#IMPLIED>
+        <!ATTLIST column width CDATA "" #REQUIRED><!ATTLIST column prop CDATA "" #REQUIRED><!ATTLIST column tooltip (true|false)>
+        <!ELEMENT outputFiled (fields *)>
+        <!ELEMENT fields (field ?)>
+        <!ATTLIST fields  name CDATA "" #REQUIRED><!ATTLIST fields class CDATA "" #REQUIRED><!ATTLIST fields assign CDATA "" #REQUIRED>
+        <!ELEMENT field ANY>
+        <!ATTLIST field  name CDATA "" #REQUIRED><!ATTLIST field label CDATA "" #REQUIRED><!ATTLIST field order CDATA#IMPLIED ><!ATTLIST field size CDATA "" #IMPLIED ><!ATTLIST field require (true|false)><!ATTLIST field note CDATA "" #IMPLIED>
+        <!ATTLIST field tag (number|text|select|date|select1|select2|select3|label|rich)><!ATTLIST field class CDATA #IMPLIED><!ATTLIST field method CDATA #IMPLIED >

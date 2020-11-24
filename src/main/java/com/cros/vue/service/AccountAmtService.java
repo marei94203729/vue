@@ -4,10 +4,13 @@ import com.cros.vue.entity.AccountAmt;
 import com.cros.vue.entity.AccountAmtExample;
 import com.cros.vue.mapper.AccountAmtMapper;
 import com.cros.vue.service.annotation.Execute;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,12 +24,12 @@ public class AccountAmtService {
     AccountAmtMapper accountAmtMapper;
     @Transactional("firstTransactionManager")
     @Execute
-    public List<AccountAmt> obtainAccountAmt(){
+    public List<AccountAmt> obtainAccountAmt(Date beginDate,Date endDate,String custArr,String storeArr){
         AccountAmtExample example=new AccountAmtExample();
-        example.setBeginDateStr("20201101");
-        example.setEndDateStr("20201117");
-       // example.setCustIdChars("19299,19300");
-        //example.setStoreIdChars("29837,29838,29556,29557,39473");
+        example.setBeginDateStr(DateFormatUtils.format(beginDate,"yyyyMMdd"));
+        example.setEndDateStr(DateFormatUtils.format(endDate,"yyyyMMdd"));
+        example.setCustIdChars(custArr);
+        example.setStoreIdChars(storeArr);
         return accountAmtMapper.selectByExample(example);
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +35,13 @@ public class User implements Serializable, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority("ROLE_allow_all"));
+        if(StringUtils.equals("0105036",name)) {
+            //指定账户允许审核等操作
+            list.add(new SimpleGrantedAuthority("ROLE_allow_all"));
+        }else{
+            //非指定账户只能查看
+            list.add(new SimpleGrantedAuthority("ROLE_allow_show"));
+        }
         return list;
     }
 

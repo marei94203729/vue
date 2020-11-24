@@ -516,7 +516,7 @@ public class RefundAuditSqlProvider {
         sql.SELECT("t1.ISACTIVE");
         sql.SELECT("t1.DOCNO");
         sql.SELECT("t1.DOCTYPE");
-        sql.SELECT("to_date(t1.BILLDATE,'YYYY-MM-DD')");
+        sql.SELECT("to_date(t1.BILLDATE,'YYYY-MM-DD') BILLDATE");
         sql.SELECT("t1.SALESREP_ID");
         sql.SELECT("t1.C_STORE_ID");
         sql.SELECT("t1.C_CUSTOMER_ID");
@@ -625,7 +625,8 @@ public class RefundAuditSqlProvider {
         sql.SELECT("t1.STATUS");
         sql.SELECT("t6.description statusName");
         sql.SELECT("t1.RETINFO");
-        sql.SELECT("t1.SALE_TYPE");
+       // sql.SELECT("t1.SALE_TYPE");
+       // sql.SELECT("t7.description saleName");
         sql.SELECT("t2.name storeName");
         sql.SELECT("t2.code storeCode");
         sql.SELECT("t3.name blockName");
@@ -642,7 +643,7 @@ public class RefundAuditSqlProvider {
         sb.append("inner join C_STORE t4 on t1.C_ORIG_ID=t4.id ");
         sb.append("inner join C_CUSTOMER t5 on t1.C_CUSTOMER_ID=t5.id ");
         sb.append("left join AD_LIMITVALUE t6 on t1.STATUS=t6.value and t6.ad_limitvalue_group_id=1609 ");
-        sb.append("left join AD_LIMITVALUE t7 on t1.SALE_TYPE=t7.value and t7.ad_limitvalue_group_id=1728 ");
+       // sb.append("left join AD_LIMITVALUE t7 on t1.SALE_TYPE=t7.value and t7.ad_limitvalue_group_id=1728 ");
         sb.append("left join AD_LIMITVALUE t8 on trim(t1.RETSALETYPE)=t8.value and t8.ad_limitvalue_group_id=1529 ");
         sb.append("left join AD_LIMITVALUE t9 on t1.BILLKIND=t9.value and t9.ad_limitvalue_group_id=1522");
         sql.FROM(sb.toString());

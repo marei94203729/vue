@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "handler.dtd">
+<configuration>
+    <condition>
+        <filter name="refundAudit" class="RefundAuditService"  assign="RefundAudit">
+            <property order="1" name="docno" label="单据" enable="true" tag="text"></property>
+            <property order="2" name="cOrigId" label="分店" enable="true" tag="custom">
+                <filter name="store" class="StoreService"  assign="Store">
+                    <property order="1" name="code" label="分店代码" enable="true" tag="text" size="15"></property>
+                    <property order="2" name="name" label="分店名称" enable="true" tag="text" size="35"></property>
+                    <property order="3" name="description" label="分店全称" enable="true" tag="text" size="52"></property>
+                    <property order="4" name="areaName" label="所属大区" enable="true" tag="text" size="20"></property>
+                    <property order="5" name="custName" label="加盟商" enable="true" tag="text" size="10"></property>
+                    <property order="6" name="partNo" label="部次号" enable="true" tag="text" size="50"></property>
+                    <property order="7" name="blockName" label="分支机构" enable="true" tag="text" size="50"></property>
+                    <property order="8" name="salerName" label="所属销售" enable="true" tag="text" size="50"></property>
+                    <property order="9" name="branchName" label="分公司" enable="true" tag="text" size="50"></property>
+                    <property order="10" name="isStop" label="关店标志" enable="true" tag="select" class="com.cros.vue.service.StoreService" method="getIsStop"></property>
+                    <property order="11" name="isactive" label="可用" enable="true" tag="select" class="com.cros.vue.service.StoreService" method="getIsActive"></property>
+                </filter>
+                <columnset>
+                    <column order="1"  sortable="custom" label="分店代码" width="100" prop="code" tooltip="true"></column>
+                    <column order="2"  sortable="custom" label="分店名称" width="100" prop="name" tooltip="true"></column>
+                    <column order="3"  sortable="custom" label="分店全称" width="100" prop="description" tooltip="true"></column>
+                    <column order="4"  sortable="custom" label="部次号" width="100" prop="partNo" tooltip="true"></column>
+                    <column order="5"  sortable="custom" label="加盟商代码" width="100" prop="custCode" tooltip="true"></column>
+                    <column order="6"  sortable="custom" label="加盟商" width="100" prop="custName" tooltip="true"></column>
+                    <column order="7"  sortable="custom" label="分支机构" width="100" prop="blockName" tooltip="true"></column>
+                    <column order="8"  sortable="custom" label="分公司" width="100" prop="branchName" tooltip="true"></column>
+                    <column order="9"  sortable="custom" label="所属大区" width="100" prop="areaName" tooltip="true"></column>
+                    <column order="9"  sortable="custom" label="所属销售" width="100" prop="salerName" tooltip="true"></column>
+                </columnset>
+            </property>
+            <property order="3" name="retsaletype" label="退货类型" enable="true" tag="select" class="com.cros.vue.service.RefundAuditService" method="getRetType"></property>
+            <property order="4" name="saleType" label="销售类型" enable="true" tag="select" class="com.cros.vue.service.RefundAuditService" method="getSaleType"></property>
+            <property order="5" name="status" label="审核状态" enable="true" tag="select" class="com.cros.vue.service.RefundAuditService" method="getRetStatus"></property>
+            <property order="6" name="billdate" label="单据日期" enable="true" tag="date"></property>
+            <property order="7" name="creationdate" label="创建时间" enable="true" tag="date"></property>
+            <property order="8" name="statustime" label="提交时间" enable="true" tag="date"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="单号" width="150" prop="docno" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="单据日期" width="100" prop="billdate" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="库房代码" width="100" prop="storeCode" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="库房名称" width="100" prop="storeName" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="机构代码" width="100" prop="blockCode" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="机构名称" width="110" prop="blockName" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="分店代码" width="100" prop="lcCode" tooltip="true"></column>
+                <column order="8" element="true" sortable="custom" label="分店名称" width="100" prop="lcName" tooltip="true"></column>
+                <column order="9" element="true" sortable="custom" label="顾客代码" width="100" prop="custCode" tooltip="true"></column>
+                <column order="10" element="true" sortable="custom" label="顾客名称" width="100" prop="custName" tooltip="true"></column>
+                <column order="11" element="true" sortable="custom" label="审核状态" width="100" prop="statusName" tooltip="true"></column>
+                <column order="12" element="true" sortable="custom" label="销售类型" width="100" prop="saleName" tooltip="true"></column>
+                <column order="13" element="true" sortable="custom" label="单据种类" width="100" prop="billName" tooltip="true"></column>
+                <column order="14" element="true" sortable="custom" label="退货类型" width="100" prop="retsaleName" tooltip="true"></column>
+                <column order="15" element="true" sortable="custom" label="退货量" width="100" prop="totQty" tooltip="true"></column>
+                <column order="16" element="true" sortable="custom" label="退货金额" width="100" prop="totAmtActual" tooltip="true"></column>
+                <column order="17" element="true" sortable="custom" label="流水号" width="120" prop="billno" tooltip="true"></column>
+                <column order="18" element="true" label="查看" width="180"  tooltip="false"></column>
+            </columnset>
+        </filter>
+        <filter name="accountAmt" class="AccountAmtService"  assign="AccountAmt">
+            <property order="1" name="cOrigId" label="分店" enable="true" tag="custom">
+                <filter name="store" class="StoreService"  assign="Store">
+                    <property order="1" name="code" label="分店代码" enable="true" tag="text" size="15"></property>
+                    <property order="2" name="name" label="分店名称" enable="true" tag="text" size="35"></property>
+                    <property order="3" name="description" label="分店全称" enable="true" tag="text" size="52"></property>
+                    <property order="4" name="areaName" label="所属大区" enable="true" tag="text" size="20"></property>
+                    <property order="5" name="custName" label="加盟商" enable="true" tag="text" size="10"></property>
+                    <property order="6" name="partNo" label="部次号" enable="true" tag="text" size="50"></property>
+                    <property order="7" name="blockName" label="分支机构" enable="true" tag="text" size="50"></property>
+                    <property order="8" name="salerName" label="所属销售" enable="true" tag="text" size="50"></property>
+                    <property order="9" name="branchName" label="分公司" enable="true" tag="text" size="50"></property>
+                    <property order="10" name="isStop" label="关店标志" enable="true" tag="select" class="com.cros.vue.service.StoreService" method="getIsStop"></property>
+                    <property order="11" name="isactive" label="可用" enable="true" tag="select" class="com.cros.vue.service.StoreService" method="getIsActive"></property>
+                </filter>
+                <columnset>
+                    <column order="1"  sortable="custom" label="分店代码" width="100" prop="code" tooltip="true"></column>
+                    <column order="2"  sortable="custom" label="分店名称" width="100" prop="name" tooltip="true"></column>
+                    <column order="3"  sortable="custom" label="分店全称" width="100" prop="description" tooltip="true"></column>
+                    <column order="4"  sortable="custom" label="部次号" width="100" prop="partNo" tooltip="true"></column>
+                    <column order="5"  sortable="custom" label="加盟商代码" width="100" prop="custCode" tooltip="true"></column>
+                    <column order="6"  sortable="custom" label="加盟商" width="100" prop="custName" tooltip="true"></column>
+                    <column order="7"  sortable="custom" label="分支机构" width="100" prop="blockName" tooltip="true"></column>
+                    <column order="8"  sortable="custom" label="分公司" width="100" prop="branchName" tooltip="true"></column>
+                    <column order="9"  sortable="custom" label="所属大区" width="100" prop="areaName" tooltip="true"></column>
+                    <column order="10"  sortable="custom" label="所属销售" width="100" prop="salerName" tooltip="true"></column>
+                </columnset>
+            </property>
+
+            <property order="2" name="billdate" label="日 期" enable="true" tag="date"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="客户代码" width="100" prop="code" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="客户简称" width="100" prop="name" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="客户全称" width="120" prop="description" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="期初余额" width="100" prop="qcye" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="销售扣款" width="100" prop="saleamt" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="退货扣款" width="110" prop="retsaleamt" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="其他扣款" width="100" prop="qtamt" tooltip="true"></column>
+                <column order="8" element="true" sortable="custom" label="客户收款" width="100" prop="custamt" tooltip="true"></column>
+                <column order="9" element="true" sortable="custom" label="应收余额" width="100" prop="ysamt" tooltip="true"></column>
+            </columnset>
+        </filter>
+        <filter name="accountAmtOne" class="AccountAmtOneService"  assign="AccountAmtOne">
+            <property order="1" name="docno" label="无用条件" enable="true" tag="text"></property>
+            <property order="2" name="billdate" label="日 期" enable="true" tag="date"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="大区" width="120" prop="areaname" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="分公司" width="120" prop="branchName" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="加盟店" width="100" prop="a" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="直营店" width="100" prop="b" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="联营店" width="100" prop="c" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="联销店" width="110" prop="d" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="小计" width="110" prop="total" tooltip="true"></column>
+            </columnset>
+        </filter>
+        <filter name="slpriceadj" class="SlpriceadjService"  assign="Slpriceadj">
+            <property order="1" name="docno" label="无用条件" enable="true" tag="text"></property>
+            <property order="2" name="billdate" label="日 期" enable="true" tag="date"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="单据编号" width="150" prop="docno" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="制单日期" width="150" prop="billdate" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="分店" width="350" prop="storefilter" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="修改时间" width="150" prop="modifieddate" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="查看" width="100" prop="id" tooltip="true"></column>
+            </columnset>
+        </filter>
+        <filter name="slpriceadjpdtItem" class="SlpriceadjpdtItemService"  assign="SlpriceadjpdtItem">
+            <property order="1" name="mProductCode" label="货号" enable="true" tag="text"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="货号" width="120" prop="mproductCode" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="年代" width="100" prop="year" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="季节" width="100" prop="season" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="批价" width="100" prop="priceactual" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="处理价" width="100" prop="pricedis" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="编号" width="150" prop="isactive" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="单据日期" width="150" prop="creationdate" tooltip="true"></column>
+            </columnset>
+        </filter>
+        <filter name="inventoryStatistics" class="InventoryStatisticsService"  assign="InventoryStatistics">
+            <property order="1" name="idp" label="部类" enable="true" tag="select3" class="com.cros.vue.service.InventoryStatisticsService" method="getIdps"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="年代" width="80" prop="year" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="春季" width="80" prop="chun" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="夏季" width="80" prop="xia" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="春夏" width="80" prop="chunxia" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="春夏合计" width="100" prop="sum1" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="秋季" width="80" prop="qiu" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="冬季" width="80" prop="dong" tooltip="true"></column>
+                <column order="8" element="true" sortable="custom" label="秋冬" width="80" prop="qiudong" tooltip="true"></column>
+                <column order="9" element="true" sortable="custom" label="秋冬合计" width="100" prop="sum2" tooltip="true"></column>
+                <column order="10" element="true" sortable="custom" label="其他" width="80" prop="other" tooltip="true"></column>
+                <column order="11" element="true" sortable="custom" label="小计" width="80" prop="total" tooltip="true"></column>
+            </columnset>
+        </filter>
+        <filter name="accountAmtTwo" class="AccountAmtTwoService"  assign="AccountAmtOne">
+            <property order="1" name="storekind" label="分店性质" enable="true" tag="select" class="com.cros.vue.service.AccountAmtOneService" method="queryKind"></property>
+            <property order="2" name="billdate" label="日 期" enable="true" tag="date"></property>
+            <columnset>
+                <column order="1" element="true"  sortable="custom" label="大区" width="120" prop="areaname" tooltip="true"></column>
+                <column order="2" element="true" sortable="custom" label="分公司" width="120" prop="branchName" tooltip="true"></column>
+                <column order="3" element="true" sortable="custom" label="三条装内裤" width="130" prop="a" tooltip="true"></column>
+                <column order="4" element="true" sortable="custom" label="两条装内裤" width="130" prop="b" tooltip="true"></column>
+                <column order="5" element="true" sortable="custom" label="内裤合计" width="100" prop="c" tooltip="true"></column>
+                <column order="6" element="true" sortable="custom" label="100元及以下打底裤" width="130" prop="d" tooltip="true"></column>
+                <column order="9" element="true" sortable="custom" label="出库合计" width="110" prop="total" tooltip="true"></column>
+                <column order="7" element="true" sortable="custom" label="袜子合计" width="110" prop="e" tooltip="true"></column>
+                <column order="8" element="true" sortable="custom" label="特价袜子" width="110" prop="f" tooltip="true"></column>
+                <column order="10" element="true" sortable="custom" label="出库量核算" width="150" prop="f" tooltip="true"></column>
+            </columnset>
+        </filter>
+    </condition>
+    <outputFiled>
+        <fields name="refundAudit" class="RefundAuditService"  assign="RefundAudit">
+            <field order="1"   label="单据编号"  name="docno" tag="label" size="100"></field>
+            <field order="2"   label="退货日期"  name="billdate" tag="label" size="20"></field>
+            <field order="3"   label="分店代码"  name="lcCode" tag="label" size="50"></field>
+            <field order="4"   label="分店名称"  name="lcName" tag="label" size="1"></field>
+            <field order="5"   label="加盟商代码"   name="custCode" tag="label" size="20"></field>
+            <field order="6"   label="加盟商名称"   name="custName" tag="label" size="25"></field>
+            <field order="7"   label="分支机构"   name="blockName" tag="label" size="100"></field>
+            <field order="8"   label="库房名称"   name="storeName" tag="label" size="30"></field>
+            <field order="9"   label="创建时间"   name="creationdate" tag="label"></field>
+            <field order="10"   label="提交时间"   name="statustime" tag="label"></field>
+            <field order="11"   label="审核状态"   name="statusName" tag="label"></field>
+            <field order="12"   label="销售类型"   name="saleName" tag="label"></field>
+            <field order="13"   label="退货类型"   name="retsaleName" tag="label"></field>
+            <field order="14"   label="总退货量"   name="totQty" tag="label"></field>
+            <field order="15"   label="总退货金额"   name="totAmtActual" tag="label"></field>
+            <field order="16"   label="单据流水号"   name="billno" tag="label"></field>
+        </fields>
+        <fields name="slpriceadj" class="SlpriceadjService"  assign="Slpriceadj">
+            <field order="1"   label="单据编号"  name="docno" tag="label" size="100"></field>
+            <field order="2"   label="制单日期"  name="billdate" tag="label" size="20"></field>
+            <field order="3"   label="分店"  name="storefilter" tag="label" size="50"></field>
+            <field order="4"   label="修改时间"  name="modifieddate" tag="label" size="1"></field>
+    </fields>
+    </outputFiled>
+</configuration>

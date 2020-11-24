@@ -68,7 +68,7 @@
         <!-- Oracle 配置 -->
         <!-- <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/> -->
         <!--</table>-->
-        <table tableName="M_RET_SALECONF_MATRIX" domainObjectName="RefundAuditItem">
+        <table tableName="B_SLPRICEADJPDTITEM" domainObjectName="SlpriceadjpdtItem">
             <!--<generatedKey column="id" sqlStatement="JDBC" identity="true"/>-->
             <!-- Mysql 配置 -->
             <!--<generatedKey column="sys_Id" sqlStatement="Mysql" identity="true" />-->

@@ -73,7 +73,7 @@
         <logger name="org.springframework.web" level="error"/>
         <Logger name="com.opensymphony.xwork2" level="error"/>
         <!--mybatis日志输出sql语句，指定，mapper所在包-->
-        <Logger name="com.byky.dbms.mapper" level="debug"/>
+        <Logger name="com.cros.vue.mapper" level="debug"/>
         <Root level="info" includeLocation="true">
             <appender-ref ref="Console"/>
             <!--此处引用异步日志输出AsyncAppender的name，如果要使用同步的则直接引用RollingFile的name-->

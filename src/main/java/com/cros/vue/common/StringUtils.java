@@ -26,7 +26,20 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static String firstCharToUpperCase(String name){
         char[] cs=name.toCharArray();
-        cs[0]-=32;
+        if(Character.isLowerCase(cs[0]))
+            cs[0]-=32;
+        return String.valueOf(cs);
+    }
+
+    /**
+     * 首字母转小写
+     * @param name
+     * @return
+     */
+    public static String firstCharToLowerCase(String name){
+        char[] cs=name.toCharArray();
+        if(Character.isUpperCase(cs[0]))
+            cs[0]+=32;
         return String.valueOf(cs);
     }
     /**

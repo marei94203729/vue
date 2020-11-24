@@ -1,5 +1,7 @@
 package com.cros.vue.entity;
 
+import com.cros.vue.service.StoreService;
+import com.cros.vue.service.annotation.Cascade;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -87,10 +89,10 @@ public class RefundAudit implements Serializable {
 
     private BigDecimal totAmtList;
 
-    private Short totAmtActual;
+    private BigDecimal totAmtActual;
 
     private Long cPeriodId;
-
+    @Cascade(value = "StoreService",method = "obtainStores",argsType =StoreExample.class,assign = Store.class)
     private Long cOrigId;
 
     private Short outStatus;
@@ -457,11 +459,11 @@ public class RefundAudit implements Serializable {
         this.totAmtList = totAmtList;
     }
 
-    public Short getTotAmtActual() {
+    public BigDecimal getTotAmtActual() {
         return totAmtActual;
     }
 
-    public void setTotAmtActual(Short totAmtActual) {
+    public void setTotAmtActual(BigDecimal totAmtActual) {
         this.totAmtActual = totAmtActual;
     }
 

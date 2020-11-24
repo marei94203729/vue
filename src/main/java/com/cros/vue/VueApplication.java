@@ -9,6 +9,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -83,6 +84,7 @@ module.exports = {
 
         */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@EnableTransactionManagement
 @MapperScan(basePackages = "com.cros.vue.mapper", sqlSessionFactoryRef = "firstSqlSessionFactory")
 @ServletComponentScan
 public class VueApplication {

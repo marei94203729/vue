@@ -45,7 +45,12 @@ public class CustomMetadataSource implements FilterInvocationSecurityMetadataSou
             return null;
         }
         if(menuService.hasMenu(requestUrl)){
-            return SecurityConfig.createList("ROLE_allow_all");
+            //判断是否是编辑
+            if(StringUtils.endsWith(requestUrl,"Eidtor")) {
+                return SecurityConfig.createList("ROLE_allow_all");
+            }else{//非编辑url允许所有角色访问
+                return SecurityConfig.createList("ROLE_allow_all","ROLE_allow_show");
+            }
         }
         // List<Menu> allMenu = menuService.findAllMenu();
         //Menu menu = menuService.queryMenuByRequestURL(requestUrl);

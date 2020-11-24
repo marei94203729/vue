@@ -24,6 +24,17 @@ public class MenuService {
         menus.add("/");
         menus.add("/Home");
         menus.add("/apis/menu");
+        menus.add("/fieldHandler");
+        menus.add("/exportInfoList");
+        menus.add("/checkHistorySaleItem");
+        menus.add("/checkHistorySaleItems");
+        menus.add("/checkSaleRefundEidtor");
+        menus.add("/queryCustByName");
+        menus.add("/rejetBillCheckStatusEidtor");
+        menus.add("/filterHandler");
+        menus.add("/conditionDataHandler");
+        menus.add("/queryAccountAmtEidtor");
+        menus.add("/slpriceadjEidtor");
         //初始化menusNode
         JsonNodeFactory jsonNodeFactory=JsonNodeFactory.instance;
         menusNode=jsonNodeFactory.arrayNode();
@@ -39,11 +50,42 @@ public class MenuService {
         objectNode2.put("icon","el-icon-location");
         arr1.add(objectNode2);
         ObjectNode objectNode3=jsonNodeFactory.objectNode();
-        objectNode3.put("title","改价数据");
-        objectNode3.put("index","1-2");
-        objectNode3.put("icon","el-icon-s-check");
+        objectNode3.put("title","改价支持");
+        objectNode3.put("index","/Home/slpriceadj");
+        objectNode3.put("icon","el-icon-s-management");
         arr1.add(objectNode3);
+        ObjectNode objectNode4=jsonNodeFactory.objectNode();
+        objectNode4.put("title","改价数据");
+        objectNode4.put("index","/Home/slpriceadjpdtItem");
+        objectNode4.put("icon","el-icon-s-check");
+        arr1.add(objectNode4);
         menusNode.add(objectNode1);
+        ObjectNode objectNode11=jsonNodeFactory.objectNode();
+        objectNode11.put("title","数据查询");
+        objectNode11.put("index","2");
+        objectNode11.put("icon","el-icon-picture-outline-round");
+        ArrayNode arr11=objectNode11.putArray("data");
+        ObjectNode objectNode12=jsonNodeFactory.objectNode();
+        objectNode12.put("title","科目余额");
+        objectNode12.put("index","/Home/accountAmt");
+        objectNode12.put("icon","el-icon-s-data");
+        arr11.add(objectNode12);
+        ObjectNode objectNode13=jsonNodeFactory.objectNode();
+        objectNode13.put("title","汇款汇总");
+        objectNode13.put("index","/Home/recable");
+        objectNode13.put("icon","el-icon-s-grid");
+        arr11.add(objectNode13);
+        ObjectNode objectNode14=jsonNodeFactory.objectNode();
+        objectNode14.put("title","库存汇总");
+        objectNode14.put("index","/Home/inventory");
+        objectNode14.put("icon","el-icon-s-marketing");
+        arr11.add(objectNode14);
+        ObjectNode objectNode15=jsonNodeFactory.objectNode();
+        objectNode15.put("title","出库统计");
+        objectNode15.put("index","/Home/sale");
+        objectNode15.put("icon","el-icon-tickets");
+        arr11.add(objectNode15);
+        menusNode.add(objectNode11);
     }
 
     /**

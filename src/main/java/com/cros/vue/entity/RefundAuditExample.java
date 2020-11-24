@@ -2356,7 +2356,7 @@ public class RefundAuditExample {
         }
 
         public Criteria andRetsaletypeEqualTo(String value) {
-            addCriterion("t1.RETSALETYPE =", value, "retsaletype");
+            addCriterion("trim(t1.RETSALETYPE) =", value, "retsaletype");
             return (Criteria) this;
         }
 
@@ -2386,7 +2386,7 @@ public class RefundAuditExample {
         }
 
         public Criteria andRetsaletypeLike(String value) {
-            addCriterion("t1.RETSALETYPE like", value, "retsaletype");
+            addCriterion("trim(t1.RETSALETYPE) like", value, "retsaletype");
             return (Criteria) this;
         }
 

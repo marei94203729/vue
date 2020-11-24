@@ -1,11 +1,15 @@
 package com.cros.vue.mapper;
 
+import com.cros.vue.entity.Customer;
 import com.cros.vue.entity.RefundAudit;
 import com.cros.vue.entity.RefundAuditExample;
+
+import java.util.HashMap;
 import java.util.List;
 
 import com.cros.vue.entity.RefundAuditItem;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -141,7 +145,7 @@ public interface RefundAuditMapper {
     @Select({
             "select",
             "t1.id,t1.AD_CLIENT_ID,t1.AD_ORG_ID,t1.OWNERID,t1.MODIFIERID,t1.CREATIONDATE,",
-            "t1.MODIFIEDDATE,t1.ISACTIVE,t1.DOCNO,t1.DOCTYPE,to_date(t1.BILLDATE,'YYYY-MM-DD'),",
+            "t1.MODIFIEDDATE,t1.ISACTIVE,t1.DOCNO,t1.DOCTYPE,to_date(t1.BILLDATE,'YYYY-MM-DD') BILLDATE,",
             "t1.SALESREP_ID,t1.C_STORE_ID,t1.C_CUSTOMER_ID,t1.DESCRIPTION,t1.AU_STATE,t1.AU_PI_ID,",
             "t1.AVG_DISCOUNT,t1.TOT_LINES,t1.TOT_QTY,t1.TOT_AMT_LIST,t1.TOT_AMT_ACTUAL,t1.C_PERIOD_ID,",
             "t1.C_ORIG_ID,t1.OUT_STATUS,t1.IN_STATUS,t1.TOT_QTYOUT,t1.TOT_AMTOUT_LIST,t1.TOT_AMTOUT_ACTUAL,",
@@ -156,13 +160,14 @@ public interface RefundAuditMapper {
             "t1.PCHECKID,t1.PCHECKTIME,t1.TOT_AMTINVED,t1.TOT_QTYINVED,t1.M_CRORETSALE_ID,t1.IS_MAIN_RETSALE,t1.IS_CRORETSALEIN,t1.CARRIER,t1.SHIPPING_REMARK,",
             "t1.IS_TOWMS,t1.DEST_ADDR,t1.M_BOX_ID,t1.QTY_BOX,t1.TOT_TAX_AMT,t1.TOT_NOTAX_AMT,t1.TAX_DIS,t1.PAYMENTSTYLE,t1.SCAN_STATUS,t1.BILLKIND,t9.description billName,",
             "t1.CONTRACTNO_FILE,t1.CONFIRM_STATUS,t1.CONFIRM_STATUSTIME,t1.CONFIRM_STATUSERID,t1.BILLNO,t1.FISNO,t1.BYIN_STATUS,t1.SCANNERID,t1.C_SALER_ID,t1.SCAN_INTIME,",
-            "t1.CONFIRM_INTIME,t1.DELIVERY_CONFIRMTIME,t1.BYOUT_STATUS,t1.UNPICK_STORE_ID,t1.SCANIN_STATUS,t1.BEHALF_REMARK,t1.ISDEFAULTSCAN,t1.STATUS,t6.description statusName,t1.RETINFO,t1.SALE_TYPE,t2.name storeName,t2.code storeCode,t3.name blockName,t3.code blockCode,t4.code lcCode,t4.name lcName,t4.description lcDescription,t5.code custCode,t5.name custName,t5.description custDescription",
+            //"t1.SALE_TYPE,t7.description saleName,",
+            "t1.CONFIRM_INTIME,t1.DELIVERY_CONFIRMTIME,t1.BYOUT_STATUS,t1.UNPICK_STORE_ID,t1.SCANIN_STATUS,t1.BEHALF_REMARK,t1.ISDEFAULTSCAN,t1.STATUS,t6.description statusName,t1.RETINFO,t2.name storeName,t2.code storeCode,t3.name blockName,t3.code blockCode,t4.code lcCode,t4.name lcName,t4.description lcDescription,t5.code custCode,t5.name custName,t5.description custDescription",
             "from M_RET_SALECONF t1 inner join C_STORE t2  on t1.C_STORE_ID=t2.id ",
             "left join  C_BLOCK t3 on t2.C_BLOCK_ID=t3.id ",
             "inner join C_STORE t4 on t1.C_ORIG_ID=t4.id ",
             "inner join C_CUSTOMER t5 on t1.C_CUSTOMER_ID=t5.id ",
             "left join AD_LIMITVALUE t6 on t1.STATUS=t6.value and t6.ad_limitvalue_group_id=1609 ",
-            "left join AD_LIMITVALUE t7 on t1.SALE_TYPE=t7.value and t7.ad_limitvalue_group_id=1728 ",
+           // "left join AD_LIMITVALUE t7 on t1.SALE_TYPE=t7.value and t7.ad_limitvalue_group_id=1728 ",
             "left join AD_LIMITVALUE t8 on trim(t1.RETSALETYPE)=t8.value and t8.ad_limitvalue_group_id=1529 ",
             "left join AD_LIMITVALUE t9 on t1.BILLKIND=t9.value and t9.ad_limitvalue_group_id=1522",
             "where t1.id = #{id,jdbcType=NUMERIC}"
@@ -310,8 +315,8 @@ public interface RefundAuditMapper {
             "t1.MX4,t1.MX5,t1.MX6,t1.MX7,t1.MX8,t1.MX9,t1.MX10,t1.MX11,t1.MX12,t1.MX13,t1.MX14,t1.MX15,",
             "t1.MX16,t1.MX17,t1.MX18,t1.MX19,t1.MX20,t1.MX21,t1.MX22,t1.MX23,t1.MX24,t1.TOT_QTY,t1.RN,",
             "t1.AMT_ACTUAL,t1.DESCRIPTION,t1.ISMODIFY,t1.QTY1,t1.QTYCAN,t1.M_COLOR_ID,t1.PRICEACTUAL2,",
-            "t1.RET_REASON,t1.PRICEACTUAL,t2.name mProductCode,t3.name retReasonName",
-            "from M_RET_SALECONF_MATRIX t1 left join M_PRODUCT t2 on t1.m_product_id=t2.id left join C_RET_QTYPE t3 on t1.RET_REASON=t3.id",
+            "t1.RET_REASON,t1.PRICEACTUAL,t2.name mProductCode,t3.name retReasonName,t4.attribname year,t5.attribname season",
+            "from M_RET_SALECONF_MATRIX t1 left join M_PRODUCT t2 on t1.m_product_id=t2.id left join C_RET_QTYPE t3 on t1.RET_REASON=t3.id left join M_DIM t4 on t2.M_DIM2_ID=t4.id left join M_DIM t5 on t2.M_DIM11_ID=t5.id",
             "where t1.M_RET_SALE_ID= #{mRetSaleId,jdbcType=NUMERIC}"
     })
     @Results({
@@ -363,6 +368,8 @@ public interface RefundAuditMapper {
             @Result(column="RET_REASON", property="retReason", jdbcType=JdbcType.NUMERIC),
             @Result(column="PRICEACTUAL", property="priceactual", jdbcType=JdbcType.NUMERIC),
             @Result(column="retReasonName", property="retReasonName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="year", property="year", jdbcType=JdbcType.VARCHAR),
+            @Result(column="season", property="season", jdbcType=JdbcType.VARCHAR),
             @Result(column="mProductCode", property="mProductCode", jdbcType=JdbcType.VARCHAR)
     })
     List<RefundAuditItem> listById(long mRetSaleId);
@@ -503,9 +510,22 @@ public interface RefundAuditMapper {
     })
     List<RefundAudit> selectByExample(RefundAuditExample example);
 
-    @UpdateProvider(type=RefundAuditSqlProvider.class, method="updateByExampleSelective")
-    int updateByExampleSelective(@Param("record") RefundAudit record, @Param("example") RefundAuditExample example);
+    @Select({
+           "call m_ret_saleconf_submit(#{id,mode=IN,jdbcType=NUMERIC},#{r_code,mode=OUT,jdbcType=NUMERIC},#{r_message ,mode=OUT,jdbcType=VARCHAR})"
+    })
+    @Options(statementType= StatementType.CALLABLE)
+    void checkBill(HashMap<String,Object> paramMap);
 
-    @UpdateProvider(type=RefundAuditSqlProvider.class, method="updateByExample")
-    int updateByExample(@Param("record") RefundAudit record, @Param("example") RefundAuditExample example);
+
+    @Update({
+            "update M_RET_SALECONF set status=1",
+            "where ID = #{id,jdbcType=NUMERIC} and status=3"
+    })
+    int updateCheckStatusByPrimaryKey(Long id);
+
+    @Update({
+            "update M_RET_SALE set modifierid=103164, modifieddate=sysdate",
+            "where ID = #{id,jdbcType=NUMERIC}"
+    })
+    int updateModifyStatusByPrimaryKey(Long id);
 }

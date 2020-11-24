@@ -1,7 +1,10 @@
 package com.cros.vue.entity;
 
+import com.cros.vue.common.AmountSerializerUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +38,12 @@ public class RefundAuditItem implements Serializable {
     @Setter
     private String mProductCode;
     private Long mProduct2Id;
-
+    @Getter
+    @Setter
+    private String year;
+    @Getter
+    @Setter
+    private String season;
     private Short mx1;
 
     private Short mx2;
@@ -87,7 +95,8 @@ public class RefundAuditItem implements Serializable {
     private Short totQty;
 
     private Short rn;
-
+    //@JsonProperty("SCORE") //将属性重新命名输出
+    @JsonSerialize(using = AmountSerializerUtils.class)//自定义格式化输出金额
     private BigDecimal amtActual;
 
     private String description;
@@ -99,13 +108,14 @@ public class RefundAuditItem implements Serializable {
     private Short qtycan;
 
     private Long mColorId;
-
+    @JsonSerialize(using = AmountSerializerUtils.class)//自定义格式化输出金额
     private BigDecimal priceactual2;
 
     private Short retReason;
     @Getter
     @Setter
     private String retReasonName;
+    @JsonSerialize(using = AmountSerializerUtils.class)//自定义格式化输出金额
     private BigDecimal priceactual;
 
     private static final long serialVersionUID = 1L;
